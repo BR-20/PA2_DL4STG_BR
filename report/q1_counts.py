@@ -1,0 +1,19 @@
+d=64;N=7;T=96;tok=N*T;E=6;types=4;psi=8
+emb=types*(13*d+d)+N*d
+S=(d*d+d)+types*d*d+((2*d+psi+1)*d+d)+d+2*d
+Tb=types*(3*d*d+d)+2*d
+pairs=5*(S+Tb)
+sched=36*32+32
+head=(d+16+32)*128+128+128*3+3
+lead=6*16
+gauge=7*2
+route=6*2
+P=emb+pairs+sched+head+lead+gauge+route
+print("params",P,"MB32",P*4/1e6)
+mac_emb=tok*13*d
+mac_S=tok*d*d+T*E*d*d+T*E*(2*d+psi+1)*d
+mac_T=tok*3*d*d
+mac_head=4*6*((d+16+32)*128+128*3)
+M=mac_emb+5*(mac_S+mac_T)+mac_head
+print("MACs",M,"GFLOP",2*M/1e9,"sec at 1GFLOPs",2*M/1e9)
+print("attn5",5*2*tok**2*d)
