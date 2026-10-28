@@ -1,0 +1,9 @@
+torch>=2.6
+torchvision>=0.21
+numpy>=2
+matplotlib>=3.9
+opencv-python-headless>=4.9
+imageio>=2.34
+markdown>=3.6
+latex2mathml>=3.77
+playwright>=1.45
