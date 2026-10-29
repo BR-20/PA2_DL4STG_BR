@@ -1,0 +1,40 @@
+flowchart TD
+  subgraph SRC["Data sources received by issuance time"]
+    LV["Levels S1 to S4 and T1<br/>B x 5 x 96 x 3<br/>value, mask, age"]
+    RN["Rain gauges R1, R2<br/>B x 2 x 96 x 3"]
+    RH["Release history<br/>actual and scheduled<br/>B x 96 x 3"]
+    RS["Announced release schedule<br/>B x 12 x 3"]
+    ST["Static layout<br/>distances d_r, connectivity,<br/>gauge to node distances"]
+    CAL["Calendar time<br/>hour of day, day of week<br/>sine and cosine, B x 96 x 4"]
+  end
+  LV --> AL["Alignment to 10 minute grid<br/>as of join on receipt time, masks, ages<br/>rain mixed to nodes by gauge weights<br/>7 nodes Res, S1, S2, S3, S4, T1, U"]
+  RN --> AL
+  RH --> AL
+  CAL --> AL
+  AL -->|"B x 7 x 96 x 17"| EMB["Node type embedding<br/>Linear 17 to 64 plus node embedding"]
+  ST --> EMB
+  ST --> AL
+  EMB -->|"B x 7 x 96 x 64"| BLK["5 x ( S block then T block )<br/>S: gated messages from upstream nodes<br/>T: causal dilated conv, dilation 1, 2, 4, 8, 16"]
+  ST --> RT["Routing layer<br/>stage dependent travel time<br/>lagged upstream level"]
+  AL -->|"B x 5 x 96 upstream series<br/>release, S1, T1, S2, S3"| RT
+  RT -->|"B x 5 x 96 routed differences<br/>plus S3 residual for node U"| BLK
+  BLK -->|"B x 7 x 96 x 64"| LAST["Take newest time token<br/>B x 7 x 64<br/>keep S1 to S4: B x 4 x 64"]
+  RS --> SCH["Schedule encoder<br/>Linear 36 to 32<br/>B x 32"]
+  LAST --> HEAD["Forecast head<br/>concat 64 + lead embedding 16 + schedule 32 = 112<br/>MLP 112 to 128 to 3<br/>for 4 stations x 6 leads"]
+  SCH --> HEAD
+  HEAD -->|"B x 4 x 6 x 3 changes"| ADD["Add last valid level<br/>spread via softplus"]
+  AL -->|"last valid level B x 4"| ADD
+  ADD --> OUT["Forecast S1 to S4<br/>leads 10 to 60 min, quantiles 0.1, 0.5, 0.9<br/>B x 4 x 6 x 3, service output = lead 60 min"]
+  classDef src fill:#E3F2FD,stroke:#1565C0,color:#0D2A4A
+  classDef prep fill:#FFF3E0,stroke:#E65100,color:#4A2300
+  classDef phys fill:#E8F5E9,stroke:#2E7D32,color:#0F3311
+  classDef learn fill:#F3E5F5,stroke:#6A1B9A,color:#2E0B40
+  classDef out fill:#FFEBEE,stroke:#C62828,color:#4A0D0D
+  class LV,RN,RH,RS,ST src
+  class AL,LAST prep
+  class RT phys
+  class EMB,BLK,SCH,HEAD learn
+  class ADD,OUT out
+  classDef added fill:#FFF9C4,stroke:#F9A825,stroke-width:3px,color:#3E3300
+  class CAL,EMB added
+  style SRC fill:#F7FBFF,stroke:#90A4AE
