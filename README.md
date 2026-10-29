@@ -14,15 +14,6 @@ Question 1 is a written design. It needs no data, training or GPU.
 
 `python report/q1_counts.py` prints 415,709 parameters, 93,010,944 multiply adds per forecast and 289,013,760 multiply adds for five joint attention blocks.
 
-The course package also has an optional, ungraded companion notebook. Nothing from it is submitted and it is not part of this repository. To run it, unzip `DL4STG_PA2.zip` from the course page and use the `Question1` folder:
-
-```
-cd Question1
-pip install -r requirements.txt
-jupyter lab Question1.ipynb
-```
-
-Run the cells in order. The models are already trained in `Question1/checkpoints`, so no GPU is needed. The interactive controls need a live Jupyter kernel.
 
 ## Question 2. Motion or memory
 
