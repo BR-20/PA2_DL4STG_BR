@@ -1,6 +1,6 @@
 # AI651 Assignment 2: river forecasting proposal and Moving MNIST ConvLSTM
 
-Bimal Rehman, roll number 25280081. The answers are in the PDF report on the LMS. This repository holds the code, the saved results, the figures, the GIFs and the record of the run.
+Bimal Rehman, roll number 25280081. The graded answers are in the PDF report on the LMS. This repository holds the code, the saved results, the figures, the GIFs and the record of the run.
 
 ## Question 1. River forecasting proposal
 
@@ -56,7 +56,6 @@ All Question 2 results come from one run on a Google Colab Tesla T4 GPU with PyT
 | `results/` | Every saved metric as JSON and every per video gap as NPZ |
 | `figures/` | Figures 1 to 6 as PNG |
 | `gifs/` | The four GIFs of Figure 3 and the four GIFs of Figure 6(a) |
-| `report/make_report.py`, `report/results_io.py` | Builds the report docx from `report/q1.md` and `results/` |
 | `tests/test_all.py` | Unit checks of the transforms, windows, reach, loss mask, consistency and flow sign |
 
 ### How to reproduce Question 2
@@ -77,11 +76,6 @@ python run.py evaluate --models A B C D
 python run.py select_videos
 python run.py figures --final D
 python run.py diagnostics --final D
-python report/make_report.py
 ```
 
 `tests/test_all.py` must print `ALL TESTS PASSED`. Moving MNIST downloads to `data/` on the first call. One training run of A, B or C took about 11 seconds per epoch on the T4 and one run of D about 17 seconds per epoch, so the eight training runs take about 52 minutes. Checkpoints go to `checkpoints/`, which is not tracked by git.
-
-### How to rebuild the report
-
-`python report/make_report.py` needs only `results/`, `figures/`, `predictions/` and `report/q1.md`, so it runs on a CPU. It writes `report/25280081_PA2_AI651_BR.docx`. It also stops with an error if any statement in the Question 2 text no longer matches the saved numbers.
