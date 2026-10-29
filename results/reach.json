@@ -1,0 +1,103 @@
+{
+ "A": {
+  "params": 480784,
+  "analytic": {
+   "input": 8,
+   "state_1": 8,
+   "state_2": 4
+  },
+  "empirical": {
+   "input": 8,
+   "state_1": 8,
+   "state_2": 4
+  }
+ },
+ "dil13": {
+  "cfg": {
+   "patch": 4,
+   "hidden": 64,
+   "kernel": 3,
+   "dilation": [
+    1,
+    3
+   ]
+  },
+  "params": 480784,
+  "analytic": {
+   "input": 16,
+   "state_1": 16,
+   "state_2": 12
+  },
+  "empirical": {
+   "input": 16,
+   "state_1": 16,
+   "state_2": 12
+  }
+ },
+ "dil12": {
+  "cfg": {
+   "patch": 4,
+   "hidden": 64,
+   "kernel": 3,
+   "dilation": [
+    1,
+    2
+   ]
+  },
+  "params": 480784,
+  "analytic": {
+   "input": 12,
+   "state_1": 12,
+   "state_2": 8
+  },
+  "empirical": {
+   "input": 12,
+   "state_1": 12,
+   "state_2": 8
+  }
+ },
+ "k5": {
+  "cfg": {
+   "patch": 4,
+   "hidden": 46,
+   "kernel": 5,
+   "dilation": [
+    1,
+    1
+   ]
+  },
+  "params": 709520,
+  "analytic": {
+   "input": 16,
+   "state_1": 16,
+   "state_2": 8
+  },
+  "empirical": {
+   "input": 16,
+   "state_1": 16,
+   "state_2": 8
+  }
+ },
+ "patch8": {
+  "cfg": {
+   "patch": 8,
+   "hidden": 64,
+   "kernel": 3,
+   "dilation": [
+    1,
+    1
+   ]
+  },
+  "params": 594496,
+  "analytic": {
+   "input": 16,
+   "state_1": 16,
+   "state_2": 8
+  },
+  "empirical": {
+   "input": 16,
+   "state_1": 16,
+   "state_2": 8
+  }
+ }
+}
