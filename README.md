@@ -70,3 +70,18 @@ python run.py diagnostics --final D
 ```
 
 `tests/test_all.py` must print `ALL TESTS PASSED`. Moving MNIST downloads to `data/` on the first call. One training run of A, B or C took about 11 seconds per epoch on the T4 and one run of D about 17 seconds per epoch, so the eight training runs take about 52 minutes. Checkpoints go to `checkpoints/`, which is not tracked by git.
+
+
+## Notes on the run record
+
+### Commit author
+Three commits show the author name "YOUR_NAME" instead of BR-20. These are the Q2.5 prediction, the Q2.11 prediction and the results commit. They were pushed from Google Colab, where the git name was left at a default value. They are my commits. I did not change the git history, so the original commit times are kept.
+
+### Commit times
+- 29 Oct, 02:43 PKT: the scripts that write the Q2.5 and Q2.11 predictions were added.
+- 29 Oct, 11:06 PKT: the Q2.5 prediction was committed, before any mirror, rotation or speed test.
+- 29 Oct, 11:08 PKT: the Q2.11 prediction was committed, after testing model A and before training models B, C and D.
+- 29 Oct, 12:00 PKT: the results, figures and GIFs were committed.
+
+### Predictions
+The predictions were set in advance as rules in two scripts in the `predictions/` folder. At each commit point, the script filled in the measured numbers and the text was committed without edits.
