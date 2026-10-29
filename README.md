@@ -1,6 +1,6 @@
 # AI651 Assignment 2: river forecasting proposal and Moving MNIST ConvLSTM
 
-Bimal Rehman, roll number 25280081. The answers are in the PDF report on the LMS. This repository holds the code, the saved results, the figures, the GIFs and the record of the run.
+Bimal & Roll number 25280081. The answers are in the PDF report on the LMS. This repository holds the code, the saved results, the figures, the GIFs and the record of the run.
 
 ## Question 1. River forecasting proposal
 
